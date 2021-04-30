@@ -1,22 +1,17 @@
 import webbrowser
 import random
-nstypelist = ["N", "S"]
-ewtypelist = ["E", "W"]
+import xlrd
 coorddes = ['1', '1', '1', '1', '1', '1', '2', '1']
 des = random.choice(coorddes)
 urllist = 'https://earth.google.com/web/search/'
 if des == "1":
-    valtype = random.choice(nstypelist)
-    valtype2 = random.choice(ewtypelist)
-    intager1 = random.randint(0,180)
-    intager2 = random.randint(0,180)
-    intager1 = str(intager1)
-    intager2 = str(intager2)
-    intbase1 = intager1 + valtype
-    intbase2 = intager2 + valtype2
-    search = intbase1 + "+" + intbase2
-    url = urllist + search
-    url = str(url)
+    randint1 = random.randint(1, 26569)
+    loc = "worldcities.xls"
+    wb = xlrd.open_workbook(loc)
+    sheet = wb.sheet_by_index(0)
+    city = sheet.cell_value(randint1, 1)
+    city = city.replace(" ", "+")
+    url = urllist + city + "/"
     webbrowser.open_new_tab(url)
 if des == "2":
     intager1 = "50.6071"
